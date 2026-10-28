@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F5F7F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080D11" media="(prefers-color-scheme: dark)">
+<title>Renue Ops · demo</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tray" viewBox="0 0 24 24"><path d="M4 13l2-8h12l2 8v6H4zM4 13h5l1 2h4l1-2h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14v10h-8l-4 4v-4H5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7zM9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="4" y="13" width="16" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="7.5" r="1" fill="currentColor"/><circle cx="8" cy="16.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-ha" viewBox="0 0 24 24"><path d="M4 12l8-7 8 7M6.5 10v9h11v-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app">
+  <aside class="side">
+    <div class="brand">Renue <i>Ops</i></div>
+    <button class="nav" data-go="home"><svg><use href="#i-home"/></svg><span>Home</span></button>
+    <button class="nav" data-go="inbox"><svg><use href="#i-tray"/></svg><span>Inbox</span><b class="b" data-badge="inbox"></b></button>
+    <button class="nav" data-go="reddit"><svg><use href="#i-chat"/></svg><span>Reddit</span><b class="b crit" data-badge="reddit"></b></button>
+    <button class="nav" data-go="shop"><svg><use href="#i-bag"/></svg><span>Wholesale</span><b class="b" data-badge="shop"></b></button>
+    <button class="nav" data-go="systems"><svg><use href="#i-server"/></svg><span>Systems</span><b class="b warn" data-badge="systems"></b></button>
+    <div class="foot">Demo with example data.<br>Nothing here is live.</div>
+  </aside>
+
+  <header class="top">
+    <div class="brand">Renue <i>Ops</i></div>
+    <span class="demo">DEMO</span>
+    <div class="clocks">
+      <span>Prague<b class="clock" data-tz="Europe/Prague"></b></span>
+      <span>New York<b class="clock" data-tz="America/New_York"></b></span>
+      <span>Los Angeles<b class="clock" data-tz="America/Los_Angeles"></b></span>
+    </div>
+    <button class="pill crit needpill" data-go="home" id="needpill"></button>
+  </header>
+
+  <main class="main">
+    <!-- HOME -->
+    <section class="view home" data-view="home">
+      <div class="card meet c-only">
+        <span class="k">Next meeting · <span data-meet-time></span> · Google Meet</span>
+        <div class="row2"><span class="title">Supplier COA call</span><span class="big" data-countdown></span></div>
+        <button class="btn block" data-toast="Opens Google Meet on the real thing.">Join Meet</button>
+      </div>
+      <div class="tiles c-only" id="tiles"></div>
+
+      <div class="needs w-only" id="needs"></div>
+
+      <div class="cols">
+        <div class="panel p-act">
+          <div class="hd"><h3>Activity</h3><span class="w-only-inline">dismiss once, gone everywhere</span><span class="c-only-inline">latest first</span></div>
+          <div class="filters w-only" id="filters"></div>
+          <div class="list" id="activity"></div>
+        </div>
+        <div class="panel p-today w-only">
+          <div class="hd"><h3>Today</h3><span>your time</span></div>
+          <div id="agenda"></div>
+        </div>
+        <div class="panel p-actions w-only">
+          <div class="hd"><h3>Actions</h3><span>confirm first</span></div>
+          <div class="acts" id="acts-home"></div>
+        </div>
+        <div class="panel p-sys w-only">
+          <div class="hd"><h3>Systems</h3><span>beelink</span></div>
+          <div id="sys-home"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INBOX -->
+    <section class="view" data-view="inbox">
+      <h2 class="vh">Inbox</h2>
+      <div class="panel"><div class="hd"><h3>VIP · alerts as urgent</h3><span>from VIP, to you only</span></div><div class="list" id="mail-vip"></div></div>
+      <div class="panel"><div class="hd"><h3>Flagged by the email analyzer</h3><span>no alert</span></div><div class="list" id="mail-flag"></div></div>
+      <div class="panel"><div class="hd"><h3>Everything else</h3><span>the Gmail app alerts on these</span></div><div class="list" id="mail-rest"></div></div>
+    </section>
+
+    <!-- REDDIT -->
+    <section class="view" data-view="reddit">
+      <h2 class="vh">Reddit</h2>
+      <div class="panel"><div class="hd"><h3>r/Renue mod queue</h3><span data-wc></span></div><div class="list" id="rd-mq"></div></div>
+      <div class="panel"><div class="hd"><h3>Mentions</h3><span>KWatch and Google Alerts</span></div><div class="list" id="rd-men"></div></div>
+      <div class="panel"><div class="hd"><h3>Watched pages</h3><span>checked every 15–30 min</span></div><div class="list" id="rd-watch"></div></div>
+    </section>
+
+    <!-- WHOLESALE -->
+    <section class="view" data-view="shop">
+      <h2 class="vh">Wholesale</h2>
+      <div class="panel" id="wh"></div>
+      <div class="panel" id="wh-done-panel"></div>
+    </section>
+
+    <!-- SYSTEMS -->
+    <section class="view" data-view="systems">
+      <h2 class="vh">Systems</h2>
+      <div class="panel"><div class="hd"><h3>Beelink</h3><span>checked every minute</span></div><div id="sys-full"></div></div>
+      <div class="panel"><div class="hd"><h3>Actions</h3><span>confirm first</span></div><div class="acts" id="acts-full"></div></div>
+      <p class="demo-note">Demo with example data. Buttons show what would happen; nothing runs.</p>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab" data-go="home"><svg><use href="#i-home"/></svg>Home</button>
+    <button class="tab" data-go="inbox"><svg><use href="#i-tray"/></svg>Inbox<b class="b" data-badge="inbox"></b></button>
+    <button class="tab" data-go="reddit"><svg><use href="#i-chat"/></svg>Reddit<b class="b crit" data-badge="reddit"></b></button>
+    <button class="tab" data-go="shop"><svg><use href="#i-bag"/></svg>Wholesale<b class="b" data-badge="shop"></b></button>
+    <button class="tab" data-go="systems"><svg><use href="#i-server"/></svg>Systems<b class="b warn" data-badge="systems"></b></button>
+  </nav>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden></div>
+
+<div class="heads" id="heads" role="status">
+  <div class="h-app"><span class="h-ico"><svg><use href="#i-ha"/></svg></span><span>Home Assistant · Renue · Urgent · now</span></div>
+  <div class="h-title" id="heads-title"></div>
+  <div class="h-text" id="heads-text"></div>
+  <div class="h-acts"><button class="hb pri" id="heads-open">Open</button><button class="hb" id="heads-snooze">Snooze 1 h</button><button class="hb" id="heads-done">Done</button></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
